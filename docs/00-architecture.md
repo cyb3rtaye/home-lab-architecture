@@ -1,27 +1,42 @@
-cat > docs/00-architecture.md <<'EOF'
-# SOC Home Lab Architecture
+# Lab Architecture
 
 ## Purpose
-This lab provides a controlled environment to practice SOC workflows:
-- detection engineering
-- alert validation
-- triage and investigation
-- evidence capture and reporting
 
-## Assets
-- Ubuntu (Sensor / Security Tooling)
-  - IP: 192.168.1.3/24
-  - Interface: enp0s3
-- Windows 10 (Workstation / Traffic Generator)
-  - IP: 192.168.1.4/24
+Provide a repeatable environment for packet capture, intrusion-detection testing, alert validation and investigation documentation.
 
-## Network
-- Subnet: 192.168.1.0/24
-- Gateway: 192.168.1.1
+## Topology
+
+```text
++--------------------------------+       +--------------------------------+
+| Ubuntu security tooling VM     |       | Windows 10 workstation VM      |
+| 192.168.1.3/24                 |<----->| 192.168.1.4/24                 |
+| Packet capture and monitoring  |       | Controlled traffic generation  |
++--------------------------------+       +--------------------------------+
+                  VirtualBox lab network: 192.168.1.0/24
+```
+
+## System Roles
+
+### Ubuntu VM
+
+- packet capture
+- network analysis
+- Snort sensor testing
+- security-tool administration
+
+### Windows 10 VM
+
+- normal user activity
+- controlled discovery and command tests
+- endpoint telemetry generation when logging tools are enabled
 
 ## Detection Objectives
-1. Validate sensor visibility
-2. Establish baseline traffic expectations
-3. Generate controlled suspicious activity inside the lab
-4. Capture evidence and produce SOC-style documentation
-EOF
+
+1. Confirm network visibility between the two systems.
+2. Establish normal traffic baselines.
+3. Generate controlled activity for detection validation.
+4. Capture evidence that can be reviewed and documented.
+
+## Diagram
+
+![Network diagram](../assets/diagrams/network-diagram.png)

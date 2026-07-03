@@ -1,45 +1,50 @@
-# SOC Home Lab Architecture (VirtualBox)
+# Home Lab Architecture
 
-A SOC repository documenting the architecture, network plan, and security baseline for a VirtualBox-based home lab used for **detection engineering, alert triage, threat simulation, and DFIR practice**.
+## Overview
 
-## Lab Overview
+This repository documents the original VirtualBox lab used for network monitoring, controlled traffic generation and detection practice.
 
-This lab simulates a small internal network with a dedicated security monitoring sensor and a workstation used for generating both normal and controlled suspicious traffic.
+## Assets
 
-### Assets
-- **Ubuntu (Sensor / Security Tooling)**
-  - IP: `192.168.1.3/24`
-  - Interface: `enp0s3`
-  - Role: IDS/monitoring + packet capture + logging
+| System | Address | Role |
+|---|---:|---|
+| Ubuntu VM | `192.168.1.3/24` | Security tooling, packet capture and network monitoring |
+| Windows 10 VM | `192.168.1.4/24` | User workstation and controlled traffic generator |
 
-- **Windows 10 (Workstation / Traffic Generator)**
-  - IP: `192.168.1.4/24`
-  - Role: user activity + controlled adversary simulations
+## Network
 
-### Network
 - Subnet: `192.168.1.0/24`
-- Gateway: `192.168.1.1`
-
-## Goals
-
-- Build documented lab infrastructure
-- Validate network visibility and telemetry sources
-- Support IDS detections, triage workflows and incident documentation
-- Produce expected outputs in screenshots 
+- Documented gateway: `192.168.1.1`
+- Virtualisation: VirtualBox
+- Testing: isolated from production systems
 
 ## Repository Structure
-soc-home-lab-architecture/
-docs/ # architecture + build notes + baseline controls
-assets/
-diagrams/ # exported network diagrams (png/svg)
-screenshots/ # evidence screenshots used in docs
 
-## Documentation Index
+```text
+home-lab-architecture/
+├── assets/
+│   ├── diagrams/
+│   └── screenshots/
+├── docs/
+│   ├── 00-architecture.md
+│   ├── 01-network-plan.md
+│   └── 02-security-baseline.md
+└── README.md
+```
 
-- `docs/00-architecture.md` — topology, asset roles, detection objectives
-- `docs/01-network-plan.md` — addressing, routing, VM networking mode
-- `docs/02-security-baseline.md` — firewall, accounts, logging, hardening checklist
+## Documentation
 
-## Notes
+- [`docs/00-architecture.md`](docs/00-architecture.md) — topology and system roles
+- [`docs/01-network-plan.md`](docs/01-network-plan.md) — addressing and connectivity tests
+- [`docs/02-security-baseline.md`](docs/02-security-baseline.md) — baseline controls and operating rules
 
-- All “suspicious activity” is simulated **inside the lab environment** .
+## Evidence
+
+- [Network diagram](assets/diagrams/network-diagram.png)
+- [Ubuntu connectivity test](assets/screenshots/ubuntu-ping-test.png)
+- [Windows connectivity test](assets/screenshots/windows-ping-test.png)
+- [Host isolation evidence](assets/screenshots/host-isolation.png)
+
+## Security Scope
+
+All testing was performed inside a controlled, non-production lab.
